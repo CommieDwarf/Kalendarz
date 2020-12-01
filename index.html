@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kalendarz &#128197;</title>
+  <meta charset="UTF-8">
+  <script src="../compiled/bundle.js" defer></script>
+  <script src="./add-event-window-script.js" defer></script>
+  <script src="./tile-hover.js" defer></script>
+
+  <link href="style.css" type="text/css" rel="stylesheet"/>
+  <link href="../fontello/css/fontello.css" type="text/css" rel="stylesheet"/>
+
+</head>
+<body>
+  <div id="main-title"><h1>2020</h1></div>
+  <div id="main">
+    <div id="add-event-window" hidden>
+      <h3>Nowe Wydarzenie</h3>
+      <form id="add-event-form">
+        <input type="time" name="time" id="time-input" value="08:00"/>
+        <input type="date" id="date-input"/>
+        <input type="text" name="event-content" id="event-content-input" size="27"/>
+        <button name="add-event" id="add-event-button">Dodaj wydarzenie</button>
+        <button name="cancel-event" id="cancel-event-button">Anuluj</button>
+      </form>
+    </div>
+    <div id="month-title">
+    🡸  <span id="month"> <strong>Listopad</strong> </span> 🡺
+    </div>
+    <div id="content">
+       <div id="week-days">
+         <span id="pon" class="week-day">Pon</span>
+         <span id="wt" class="week-day">Wt</span>
+         <span id="sr" class="week-day">Śr</span>
+         <span id="czw" class="week-day">Czw</span>
+         <span id="piat" class="week-day">Piąt</span>
+         <span id="sob" class="week-day">Sob</span>
+         <span id="niedz" class="week-day">Niedź</span>
+       </div>
+       <div id="day-tiles">
+        <div id="tile-1" class="day-tile">
+          Troche mało tu miejsca
+        </div>
+        <div id="tile-2" class="day-tile today-tile">
+        <span id="short-event-1">1</span>
+        Powiedz mi który to dzień dzisiejszy
+        </div>
+        <div id="tile-3" class="day-tile selected-tile">
+
+        </div>
+        <div id="tile-4" class="day-tile">
+          4<br>
+          ?
+
+        </div>
+        <div id="tile-5" class="day-tile">
+
+        </div>
+        <div id="tile-6" class="day-tile selected-tile-3">
+          ...a który ma być zaznaczeniem
+        </div>
+        <div id="tile-7" class="day-tile">
+          7
+        </div>
+        <div id="tile-8" class="day-tile">
+          8
+        </div>
+        <div id="tile-9" class="day-tile">
+          9
+        </div>
+        <div id="tile-10" class="day-tile">
+          10
+        </div>
+        <div id="tile-11" class="day-tile">
+          11
+        </div>
+        <div id="tile-12" class="day-tile">
+          12
+        </div>
+        <div id="tile-13" class="day-tile">
+          13
+        </div>
+        <div id="tile-14" class="day-tile">
+          14
+        </div>
+        <div id="tile-15" class="day-tile">
+          15
+        </div>
+        <div id="tile-16" class="day-tile">
+          16
+        </div>
+        <div id="tile-17" class="day-tile">
+          17
+        </div>
+        <div id="tile-18" class="day-tile">
+          18
+        </div>
+        <div id="tile-19" class="day-tile">
+          19
+        </div>
+        <div id="tile-20" class="day-tile">
+          20
+        </div>
+        <div id="tile-21" class="day-tile">
+          21
+        </div>
+        <div id="tile-22" class="day-tile">
+          22
+        </div>
+        <div id="tile-23" class="day-tile">
+          23
+        </div>
+        <div id="tile-24" class="day-tile">
+          24
+        </div>
+        <div id="tile-25" class="day-tile">
+          25
+        </div>
+        <div id="tile-26" class="day-tile">
+          26
+        </div>
+        <div id="tile-27" class="day-tile">
+          27
+        </div>
+        <div id="tile-28" class="day-tile">
+          28
+        </div>
+        <div id="tile-29" class="day-tile">
+          29
+        </div>
+        <div id="tile-30" class="day-tile">
+          30
+        </div>
+        <div id="tile-31" class="day-tile">
+          31
+        </div>
+        <div id="tile-29" class="day-tile">
+          29
+        </div>
+        <div id="tile-30" class="day-tile">
+          30
+        </div>
+        <div id="tile-31" class="day-tile">
+          31
+        </div>
+        <div id="tile-29" class="day-tile">
+          29
+        </div>
+        <div id="tile-30" class="day-tile">
+          30
+        </div>
+        <div id="tile-31" class="day-tile">
+          31
+        </div>
+      </div>
+    </div>
+    <div id="day-preview">
+      <div id="day-preview-title">
+        <h2>Wtorek</h2>
+      </div>
+      <div id="day-preview-content">
+        <div id="day-preview-schedule">
+          <div id="day-events">
+            <div id="event-1" class="event">
+              <div class="event-time-div">
+                <div id="event-time-1" class="event-time">
+                  8:00
+                </div>
+              </div>
+              <div id="event-content-1" class="event-content">
+              Umyć okna
+              </div>
+              <div class="event-menu">
+                <div class="event-edit">
+                  <i class="icon-pencil"></i>
+                </div>
+                <div class="event-remove">
+                  <i class="icon-trash-empty"></i>
+                </div>
+              </div>
+            </div>
+            <div id="event-2" class="event">
+              <div class="event-time-div">
+                <div id="event-time-1" class="event-time">
+                  21:37
+                </div>
+              </div>
+              <div id="event-content-1" class="event-content">
+              Nasrać do paczkomatu
+              </div>
+              <div class="event-menu">
+                <div class="event-edit">
+                  <i class="icon-pencil"></i>
+                </div>
+                <div class="event-remove">
+                  <i class="icon-trash-empty"></i>
+                </div>
+              </div>
+            </div>
+            <div id="event-3" class="event">
+              <div class="event-time-div">
+                <div id="event-time-1" class="event-time">
+                  19:22
+                </div>
+              </div>
+              <div id="event-content-1" class="event-content">
+              Zrobić zakupy
+              </div>
+              <div class="event-menu">
+                <div class="event-edit">
+                  <i class="icon-pencil"></i>
+                </div>
+                <div class="event-remove">
+                  <i class="icon-trash-empty"></i>
+                </div>
+              </div>
+            </div>
+            <div id="event-1" class="event">
+              <div class="event-time-div">
+                <div id="event-time-1" class="event-time">
+                  8:45
+                </div>
+              </div>
+              <div id="event-content-1" class="event-content">
+              Umyć okna
+              </div>
+              <div class="event-menu">
+                <div class="event-edit">
+                  <i class="icon-pencil"></i>
+                </div>
+                <div class="event-remove">
+                  <i class="icon-trash-empty"></i>
+                </div>
+              </div>
+            </div>
+            <div id="event-2" class="event">
+              <div class="event-time-div">
+                <div id="event-time-1" class="event-time">
+                  20:05
+                </div>
+              </div>
+              <div id="event-content-1" class="event-content">
+              Nasrać do paczkomatu
+              </div>
+              <div class="event-menu">
+                <div class="event-edit">
+                  <i class="icon-pencil"></i>
+                </div>
+                <div class="event-remove">
+                  <i class="icon-trash-empty"></i>
+                </div>
+              </div>
+            </div>
+            <div id="event-3" class="event">
+              <div class="event-time-div">
+                <div id="event-time-1" class="event-time">
+                  3:20
+                </div>
+              </div>
+              <div id="event-content-1" class="event-content">
+              Zrobić zakupy
+              </div>
+              <div class="event-menu">
+                <div class="event-edit">
+                  <i class="icon-pencil"></i>
+                </div>
+                <div class="event-remove">
+                  <i class="icon-trash-empty"></i>
+                </div>
+              </div>
+            </div>
+            <div id="event-3" class="event">
+              <div id="event-time-1" class="event-time">
+                -
+              </div>
+              <div id="event-content-1" class="event-content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing
+                elit. Duis sit amet leo ac
+              </div>
+              <div class="event-menu">
+                <div class="event-edit">
+                  <i class="icon-pencil"></i>
+                </div>
+                <div class="event-remove">
+                  <i class="icon-trash-empty"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="add-event-div">
+          <button id="new-event-button">
+          Nowe wydarzenie
+          </button>
+        </div>
+        <div id="preview-diary-div">
+          <textarea id="preview-diary-textarea" cols="100">Drogi pamiętniczku, stary przyjacielu. Piszę do Ciebie bo zajebiście mi się nudzi. Od wigilii - na której straciłem cała rodzinę (niech się smażą w piekle) przebyłem wieleset tysięcy kilometrów. Marzenia się spełniają. Podróżuje po kosmosie jak słynny tułacz z Pacanowa, ale ja w przeciwienstwie do niego nie chcę trafić do burdelu. Jeśli chodzi o dziewczynki - można powiedzieć, że jestem jaroszem. Moim konikiem jest turystyka. Co widziałem w kosmosie to moje. Walki gladiatorów na planecie Wojny. Chujowy kutasenat (jakie tam są ogrody..) </textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
