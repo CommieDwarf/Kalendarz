@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 
 export function Tile(props) {
-  let date = props.date;
+  let events = props.events;
+
+
+
+
+  function shortenEvents(events) {
+    console.log('xD')
+  }
 
   return (
     <div className="day-tile">
-      Troche mało tu miejsca
+      <ul>
+        <li>12345678 &#8230;</li>
+        <li>12345678 &#8230;</li>
+        <li>12345678 &#8230;</li>
+        <li>12345678 &#8230;</li>
+      </ul>
     </div>
   )
 }

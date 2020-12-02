@@ -2,11 +2,23 @@ import React, { useState } from 'react';
 import { Tile } from './tile.js';
 
 
-export function Content(props) {
+export function MonthContent(props) {
   let tiles = [];
-  for (let i = 0; i < 31; i++) {
-    tiles.push(<Tile/>);
+  let events = props.events
+
+  for (let i = 0; i < props.numDays; i++) {
+    let thisDayEvents = [];
+    for (let j = 0; j < events.length; j++) {
+      if (events[j].date.day == i) {
+        thisDayEvents.push(events[j])
+      }
+    }
+   tiles.push(<Tile events={thisDayEvents}/>);
   }
+
+
+
+
   return (
     <div id="content">
        <div id="week-days">
