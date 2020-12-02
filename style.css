@@ -65,12 +65,15 @@ body {
   padding: 5px;
 }
 .day-tile > ul > li {
-  margin: 0;
   padding: 0;
-  margin-left: 15px;
+  margin-left: 12px;
 }
 .day-tile > ul {
   margin: 0;
+  padding: 0;
+}
+.day-tile > ul > li > span  {
+  margin-left: -1px;
   padding: 0;
 }
 .highlight-tile {

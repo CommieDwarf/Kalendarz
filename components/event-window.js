@@ -1,9 +1,9 @@
 import React from "react";
 
-export function AddEventWindow(props) {
+export function EventWindow(props) {
   return (
-    <div id="add-event-window" hidden>
-      <h3>Nowe Wydarzenie</h3>
+    <div id="add-event-window">
+      <h3>{props.action == "new" ? 'Nowe Wydarzenie' : "Edytuj Wydarzenie"}</h3>
       <form id="add-event-form">
         <input type="time" name="time" id="time-input" value="08:00"/>
         <input type="date" id="date-input"/>

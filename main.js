@@ -24,7 +24,31 @@ function Main(props) {
         date: {day: currentDay, month: currentMonth, year: currentYear},
         hour: `${currentHour}:${currentMinute}`,
         text: "Rucham psa jak sra"
-      }
+      },
+      {
+        id: 1,
+        date: {day: currentDay, month: currentMonth, year: currentYear},
+        hour: `${currentHour}:${currentMinute}`,
+        text: "Nasrać do paczkomatu"
+      },
+      {
+        id: 2,
+        date: {day: currentDay, month: currentMonth, year: currentYear},
+        hour: `${currentHour}:${currentMinute}`,
+        text: "Zrobić zakupy"
+      },
+      {
+        id: 3,
+        date: {day: currentDay, month: currentMonth, year: currentYear},
+        hour: `${currentHour}:${currentMinute}`,
+        text: "Rucham psa jak sra"
+      },
+      {
+        id: 4,
+        date: {day: currentDay, month: currentMonth, year: currentYear},
+        hour: `${currentHour}:${currentMinute}`,
+        text: "Rucham psa jak sra"
+      },
     ]
   )
 
@@ -50,14 +74,18 @@ function Main(props) {
       return lastDay.getDate();
     }
 
+    function deleteEvent(eventId) {
+      setEvents(events.filter((e) => e.id != eventId
+      ))
+    }
+
   return (
     <div>
-
       <YearTitle year={selectedDate.year} />
       <AddEventWindow />
       <MonthTitle month={selectedDate.month}/>
       <MonthContent selectedDate={selectedDate} events={thisMonthEvents} numDays={numDays}/>
-      <DayPreview selectedDate={selectedDate}/>
+      <DayPreview selectedDate={selectedDate} events={thisMonthEvents} deleteEvent={deleteEvent}/>
     </div>
   )
 }

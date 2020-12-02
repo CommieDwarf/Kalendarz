@@ -11,7 +11,7 @@ export function DayPreview(props) {
         <h2>{daysOfAWeek[props.selectedDate.day]}</h2>
       </div>
       <div id="day-preview-content">
-        <DayPreviewSchedule />
+        <DayPreviewSchedule events={props.events} deleteEvent={props.deleteEvent}/>
         <AddEventButton />
         <Diary />
       </div>
