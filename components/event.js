@@ -4,12 +4,14 @@ export function Event(props) {
   let currentEvent = props.event;
 
   function handleDelete() {
-    console.log("deleting: ", currentEvent.id)
     props.deleteEvent(currentEvent.id)
   }
 
   let eventWindow = document.getElementById('add-event-window');
 
+  function handleEdit() {
+    props.toggleWindow("edit", currentEvent);
+  }
 
   return (
     <div id="event-1" className="event">
@@ -22,7 +24,7 @@ export function Event(props) {
         {currentEvent.text}
       </div>
       <div className="event-menu">
-        <div className="event-edit">
+        <div className="event-edit" onClick={handleEdit}>
           <i className="icon-pencil"></i>
         </div>
         <div className="event-remove" onClick={handleDelete}>

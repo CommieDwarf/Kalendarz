@@ -242,7 +242,7 @@ body {
   border-radius: 10px;
 }
 
-#add-event-window {
+#event-window {
   position: absolute;
   left: 30%;
   top: 30%;
@@ -258,7 +258,7 @@ box-shadow: 0px 0px 10px 1px rgba(235,154,40,0.7);
   cursor: pointer;
   user-select: none;
 }
-#add-event-window > h3 {
+#event-window > h3 {
   margin: 10px;
   margin-top: 5px;
   text-align: center;

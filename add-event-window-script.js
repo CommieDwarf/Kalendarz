@@ -1,13 +1,6 @@
-document.getElementById('cancel-event-button').addEventListener('click', toggleAddEventWindow);
-document.getElementById('new-event-button').addEventListener('click', toggleAddEventWindow);
 
+let eventWindow = document.getElementById('event-window');
 
-let eventWindow = document.getElementById('add-event-window');
-
-function toggleAddEventWindow(event) {
-  event.preventDefault();
-  eventWindow.hidden = !eventWindow.hidden;
-}
 
 
 eventWindow.onmousedown = function(event) {

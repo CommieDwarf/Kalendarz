@@ -13,7 +13,7 @@ export function MonthContent(props) {
         thisDayEvents.push(events[j])
       }
     }
-   tiles.push(<Tile events={thisDayEvents}/>);
+   tiles.push(<Tile events={thisDayEvents} key={i}/>);
   }
 
 

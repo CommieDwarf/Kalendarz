@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { AddEventWindow } from "./components/add-event-window";
+import { EventWindow } from "./components/event-window";
 import { MonthTitle } from "./components/month-title";
 import { MonthContent } from "./components/month-content";
 import { DayPreview } from "./components/day-preview"
@@ -21,32 +21,11 @@ function Main(props) {
     [
       {
         id: 0,
-        date: {day: currentDay, month: currentMonth, year: currentYear},
-        hour: `${currentHour}:${currentMinute}`,
-        text: "Rucham psa jak sra"
-      },
-      {
-        id: 1,
-        date: {day: currentDay, month: currentMonth, year: currentYear},
-        hour: `${currentHour}:${currentMinute}`,
-        text: "Nasrać do paczkomatu"
-      },
-      {
-        id: 2,
-        date: {day: currentDay, month: currentMonth, year: currentYear},
-        hour: `${currentHour}:${currentMinute}`,
-        text: "Zrobić zakupy"
-      },
-      {
-        id: 3,
-        date: {day: currentDay, month: currentMonth, year: currentYear},
-        hour: `${currentHour}:${currentMinute}`,
-        text: "Rucham psa jak sra"
-      },
-      {
-        id: 4,
-        date: {day: currentDay, month: currentMonth, year: currentYear},
-        hour: `${currentHour}:${currentMinute}`,
+        date: {day: "03", month: "11", year: "2020"},
+        time: {
+          hours: "08",
+          minutes: "50",
+        },
         text: "Rucham psa jak sra"
       },
     ]
@@ -79,13 +58,37 @@ function Main(props) {
       ))
     }
 
+    let [windowAction, setWindowAction] = useState("");
+    let [eventToEdit, setEventToEdit] = useState();
+    let [justOpened, setJustOpened] = useState(false);
+
+    function toggleEventWindow(action, e) {
+      eventWindow = document.getElementById('event-window');
+      if (eventWindow.hidden == true) {
+        setJustOpened(!justOpened);
+        eventWindow.hidden = !eventWindow.hidden;
+        setJustOpened(!justOpened);
+      } else if (windowAction == action) {
+        eventWindow.hidden = !eventWindow.hidden;
+        setJustOpened(!justOpened);
+      } else if (action == "hide") {
+        eventWindow.hidden = !eventWindow.hidden;
+      }
+      setWindowAction(action)
+      setEventToEdit(e);
+
+    }
+
+    let [newEvent, setNewEvent] = useState();
+
+
   return (
     <div>
       <YearTitle year={selectedDate.year} />
-      <AddEventWindow />
+      <EventWindow event={eventToEdit} toggleWindow={toggleEventWindow} action={windowAction} setNewEvent={setNewEvent} newEvent={newEvent} justOpened={justOpened}/>
       <MonthTitle month={selectedDate.month}/>
       <MonthContent selectedDate={selectedDate} events={thisMonthEvents} numDays={numDays}/>
-      <DayPreview selectedDate={selectedDate} events={thisMonthEvents} deleteEvent={deleteEvent}/>
+      <DayPreview selectedDate={selectedDate} events={thisMonthEvents} deleteEvent={deleteEvent} toggleWindow={toggleEventWindow}/>
     </div>
   )
 }
