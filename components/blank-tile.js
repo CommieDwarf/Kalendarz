@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-export function Tile(props) {
-  let events = props.events;
+export function BlankTile(props) {
+  /* let events = props.events;
   events = events.map((e) => e.text);
   events = shortenEvents(events);
   events = events.slice(0, 4);
@@ -19,15 +19,12 @@ export function Tile(props) {
       }
     })
   }
-
-
-
-
+  */
   return (
-    <div className="day-tile" onClick={props.selectDay} day={props.day + 1}>
+    <div className="day-tile blank-tile">
+    <div className="day">{props.day + 1}</div>
       <ul>
-        <div className="day">{props.day + 1}</div>
-        {events}
+
       </ul>
     </div>
   )

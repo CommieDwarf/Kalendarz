@@ -17,7 +17,7 @@ export function Event(props) {
     <div id="event-1" className="event">
       <div className="event-time-div">
         <div id="event-time-1" className="event-time">
-          {currentEvent.hour}
+          {currentEvent.time.hours+":"+currentEvent.time.minutes}
         </div>
       </div>
       <div id="event-content-1" className="event-content">
