@@ -12,6 +12,8 @@ export function Event(props) {
   function handleEdit() {
     props.toggleWindow("edit", currentEvent);
   }
+  let easterEgg;
+  (currentEvent.time.hours == 21 && currentEvent.time.minutes == 37) ? easterEgg = true : easterEgg = false;
 
   return (
     <div id="event-1" className="event">
@@ -25,7 +27,7 @@ export function Event(props) {
       </div>
       <div className="event-menu">
         <div className="event-edit" onClick={handleEdit}>
-          <i className="icon-pencil"></i>
+          {easterEgg ? <img src="./img/kremowka.png" class="kremowka"/> : <i className="icon-pencil"></i>}
         </div>
         <div className="event-remove" onClick={handleDelete}>
           <i className="icon-trash-empty"></i>

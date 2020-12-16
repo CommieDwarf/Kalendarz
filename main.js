@@ -9,9 +9,6 @@ import { YearTitle } from "./components/year-title";
 
 function Main(props) {
 
-
-
-
   let today = new Date();
   let currentYear = today.getFullYear();
   let currentMonth = today.getMonth();
@@ -43,7 +40,7 @@ function Main(props) {
       },
       {
         id: 2,
-        date: {day: "07", month: "12", year: "2020"},
+        date: {day: "17", month: "12", year: "2020"},
         time: {
           hours: "10",
           minutes: "30",
@@ -52,10 +49,10 @@ function Main(props) {
       },
       {
         id: 3,
-        date: {day: "07", month: "12", year: "2020"},
+        date: {day: "17", month: "12", year: "2020"},
         time: {
           hours: "21",
-          minutes: "37",
+          minutes: "38",
         },
         text: "Puścić barkę"
       },
@@ -180,7 +177,13 @@ function Main(props) {
   chcę trafić do burdelu. Jeśli chodzi o dziewczynki -
   można powiedzieć, że jestem jaroszem. Moim konikiem jest
   turystyka. Co widziałem w kosmosie to moje. Walki gladiatorów
-  na planecie Wojny...`
+  na planecie Wojny. Chujowy kutasenat(jakie tam są ogrody..). Szkoda, że akurat jak byłem
+  to sala faliczna była nieczynna. O.. albo tutaj. Wodogrzmoty Dorna. Nawet krzyż pod pałacem
+  admirała gwiezdnej floty. Na zdjęciu widać dużo gwardzistów bo tego dnia jakis krejzol cisnął
+  słoiczkiem z gównem w tablicę pamiątkową. Teraz moim celem jest przejażdżka najdluższym mostem kolejowym
+  w kosmosie. Dobra pamiętniczku narazie koniec. Ty już sie nawpierdalałeś atramentu, a ja nic jeszcze nie jadłem.
+  Odezwę sie potem. Pa.
+  ...spierdalaj.`
 
   let [dayNotes, setDayNotes] = useState([
     {
@@ -188,7 +191,7 @@ function Main(props) {
       date: {
         year: 2020,
         month: 12,
-        day: 7,
+        day: 17,
       },
       note: notka.replace(/\s+/g, " ")
     }
@@ -227,20 +230,18 @@ function Main(props) {
   }, [currentDate, selectedDate])
 
 
-
-
-
-
   let [coords, setCoords] = useState();
 
   useEffect(() => {
     document.getElementById('tile-' + currentDay).classList.add('selected-tile')
-
+    console.log("xD@22")
     navigator.geolocation.getCurrentPosition((position) => {
+      console.log('xD')
       setCoords({
-        long: Math.round(position.coords.longitude),
-        lat: Math.round(position.coords.latitude)
+        long: Math.round(position.coords.longitude * 1000000000) / 1000000000,
+        lat: Math.round(position.coords.latitude * 1000000000) / 1000000000
       })
+      console.log('dd')
     })
   }, [])
 
@@ -248,6 +249,7 @@ function Main(props) {
   let apiKey = '26d72d7bac713c25aa2ee85ea50d2f73';
   useEffect(() => {
     let location;
+    console.log(coords)
     if (coords) {
       location = `lat=${coords.lat}&lon=${coords.long}`
     } else {
@@ -294,9 +296,6 @@ function Main(props) {
   function kelvinToCelcius(kelvin) {
     return kelvin - 273.15
   }
-
-  let long;
-  let lat;
 
   return (
     <div>

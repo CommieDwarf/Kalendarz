@@ -1,0 +1,196 @@
+[33mcommit 1220b71a8bd0e47e9f7c58e5138e85aedf5f6a95[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Konrad <>
+Date:   Wed Dec 16 11:14:11 2020 +0100
+
+    add location based weather
+
+[1mdiff --git a/components/day-preview-schedule.js b/components/day-preview-schedule.js[m
+[1mindex 56749f2..f735fa2 100644[m
+[1m--- a/components/day-preview-schedule.js[m
+[1m+++ b/components/day-preview-schedule.js[m
+[36m@@ -8,7 +8,6 @@[m [mexport function DayPreviewSchedule(props) {[m
+   })[m
+   events = events.map((e, index) => <Event key={index} event={e} deleteEvent={props.deleteEvent} toggleWindow={props.toggleWindow}/>)[m
+ [m
+[31m-  console.log(events)[m
+   return ([m
+     <div id="day-preview-schedule">[m
+       <div id="day-events">[m
+[1mdiff --git a/components/day-preview.js b/components/day-preview.js[m
+[1mindex a3cb753..997da2f 100644[m
+[1m--- a/components/day-preview.js[m
+[1m+++ b/components/day-preview.js[m
+[36m@@ -9,7 +9,7 @@[m [mexport function DayPreview(props) {[m
+   return ([m
+     <div id="day-preview">[m
+       <div id="day-preview-title">[m
+[31m-        <h2>{daysOfAWeek[props.selectedDate.dayOfWeek]}</h2>[m
+[32m+[m[32m        <h2>{props.selectedDate.day ? daysOfAWeek[props.selectedDate.dayOfWeek] : "..."} </h2>[m
+       </div>[m
+       <div id="day-preview-content">[m
+         <Weather weather={props.weather}/>[m
+[1mdiff --git a/components/event-window.js b/components/event-window.js[m
+[1mindex 50ce29b..488d610 100644[m
+[1m--- a/components/event-window.js[m
+[1m+++ b/components/event-window.js[m
+[36m@@ -104,7 +104,7 @@[m [mexport function EventWindow(props) {[m
+         <input type="date" id="date-input"[m
+           value={props.newEvent.date.year+"-"+props.newEvent.date.month+"-"+props.newEvent.date.day} onChange={handleChange}/>[m
+         <input type="text" name="event-content" id="event-content-input" size="27"[m
+[31m-          defaultValue={props.action == "edit" ? props.event.text : ""}[m
+[32m+[m[32m          //defaultValue={props.action == "edit" ? props.event.text : ""}[m
+           value={props.newEvent.text}[m
+           onChange={handleChange}/>[m
+         <button name="add-event" id="add-event-button" onClick={handleAdd}>Dodaj wydarzenie</button>[m
+[1mdiff --git a/components/month-content.js b/components/month-content.js[m
+[1mindex 55ff268..1419edb 100644[m
+[1m--- a/components/month-content.js[m
+[1m+++ b/components/month-content.js[m
+[36m@@ -33,7 +33,21 @@[m [mexport function MonthContent(props) {[m
+         hasNote = true;[m
+       }[m
+     }[m
+[31m-   tiles.push(<Tile events={thisDayEvents} selectDay={selectDay} day={i} key={i} hasNote={hasNote}/>);[m
+[32m+[m
+[32m+[m[32m    let hasWeather = false;[m
+[32m+[m[32m    if (props.weather && props.weather.list) {[m
+[32m+[m[32m      let weather = props.weather.list[m
+[32m+[m[32m      for (let k = 0; k < weather.length; k++) {[m
+[32m+[m[32m        let date = new Date(weather[k].dt * 1000)[m
+[32m+[m[32m        if (date.getFullYear() == props.selectedDate.year &&[m
+[32m+[m[32m        date.getMonth() + 1 == props.selectedDate.month &&[m
+[32m+[m[32m        date.getDate() == i + 1) {[m
+[32m+[m[32m          hasWeather = true;[m
+[32m+[m[32m        }[m
+[32m+[m[32m      }[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m   tiles.push(<Tile events={thisDayEvents} selectDay={selectDay} day={i} key={i} hasNote={hasNote} hasWeather={hasWeather}/>);[m
+   }[m
+ [m
+   let i = 0;[m
+[1mdiff --git a/components/month-title.js b/components/month-title.js[m
+[1mindex cccdfd5..2a9f020 100644[m
+[1m--- a/components/month-title.js[m
+[1m+++ b/components/month-title.js[m
+[36m@@ -14,11 +14,13 @@[m [mexport function MonthTitle(props) {[m
+       props.setSelectedDate((prev) => ({[m
+         ...prev,[m
+         year: props.year + 1,[m
+[32m+[m[32m        day: "",[m
+       }))[m
+     }[m
+     props.setSelectedDate((prev) => ({[m
+       ...prev,[m
+[31m-      month: monthNum[m
+[32m+[m[32m      month: monthNum,[m
+[32m+[m[32m      day: "",[m
+     }))[m
+     unselectAll();[m
+   }[m
+[36m@@ -30,11 +32,13 @@[m [mexport function MonthTitle(props) {[m
+       props.setSelectedDate((prev) => ({[m
+         ...prev,[m
+         year: props.year - 1,[m
+[32m+[m[32m        day: "",[m
+       }))[m
+     }[m
+     props.setSelectedDate((prev) => ({[m
+       ...prev,[m
+[31m-      month: monthNum[m
+[32m+[m[32m      month: monthNum,[m
+[32m+[m[32m      day: "",[m
+     }))[m
+     unselectAll();[m
+   }[m
+[1mdiff --git a/components/tile.js b/components/tile.js[m
+[1mindex 9d5a166..46ef340 100644[m
+[1m--- a/components/tile.js[m
+[1m+++ b/components/tile.js[m
+[36m@@ -26,6 +26,7 @@[m [mexport function Tile(props) {[m
+   return ([m
+     <div className="day-tile" onClick={props.selectDay} day={props.day + 1} id={'tile-' + (props.day + 1)}>[m
+       {props.hasNote && <i className="icon-note"></i>}[m
+[32m+[m[32m      {props.hasWeather && <i className="icon-cloud-sun"></i>}[m
+       <ul>[m
+         <div className="day">{props.day + 1}</div>[m
+         {events}[m
+[1mdiff --git a/components/weather.js b/components/weather.js[m
+[1mindex 62867c7..7b9c336 100644[m
+[1m--- a/components/weather.js[m
+[1m+++ b/components/weather.js[m
+[36m@@ -4,27 +4,24 @@[m [mexport function Weather(props) {[m
+   let weather = props.weather;[m
+   let weatherList;[m
+   let [dataLoaded, setDataLoaded] = useState(false);[m
+[31m-  useEffect(() => {[m
+[31m-    if (weather.length > 0) {[m
+[31m-      weatherList = weather.map((w) => {[m
+[32m+[m[32m  if (weatherList) {[m
+[32m+[m[32m    setDataLoaded(true);[m
+[32m+[m[32m  }[m
+[32m+[m[32m      weatherList = weather.map((w, i) => {[m
+         return ([m
+[31m-          <div className="hourly-weather">[m
+[32m+[m[32m          <div className="hourly-weather" key={i}>[m
+             <div className="hourly-weather-subdiv">[m
+[31m-              <img src={`img/weather.icons/${w[2]}.png`} />[m
+[32m+[m[32m              <img src={`./img/weather-icons/${w[2]}.png`} />[m
+               <div className="temperature">[m
+                 <i className="icon-temperatire"></i>[m
+[31m-                <span className="degrees">{w[3]}</span>[m
+[32m+[m[32m                <span className="degrees">{w[3]}&#176;</span>[m
+               </div>[m
+             </div>[m
+[31m-            <span className="weather-hour">{formatTime(w[0])+":" + formatTime(w[1])}</span>[m
+[32m+[m[32m            <span className="weather-hour">{formatTime(w[0])+":"+formatTime(w[1])}</span>[m
+           </div>[m
+         )[m
+       })[m
+[31m-      console.log(weatherList)[m
+[31m-    }[m
+[31m-    setDataLoaded(true);[m
+ [m
+[31m-  }, [weather])[m
+ [m
+ [m
+   function formatTime(time) {[m
+[36m@@ -34,9 +31,6 @@[m [mexport function Weather(props) {[m
+       return time;[m
+     }[m
+   }[m
+[31m-[m
+[31m-[m
+[31m-[m
+   return ([m
+     <div id="weather-div">[m
+       {weatherList}[m
+[1mdiff --git a/main.js b/main.js[m
+[1mindex 346519f..2c7dc87 100644[m
+[1m--- a/main.js[m
+[1m+++ b/main.js[m
+[36m@@ -221,35 +221,55 @@[m [mfunction Main(props) {[m
+     document.querySelectorAll('.day-tile').forEach((tile) => {[m
+       tile.classList.remove('today-tile')[m
+     })[m
+[31m-    console.log(currentDate.month);[m
+[31m-    console.log(selectedDate.month);[m
+     if (currentDate.month + 1 == selectedDate.month) {[m
+       document.getElementById("tile-" + currentDate.day).classList.add('today-tile');[m
+     }[m
+   }, [currentDate, selectedDate])[m
+ [m
+ [m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m  let [coords, setCoords] = useState();[m
+[32m+[m
+[32m+[m[32m  useEffect(() => {[m
+[32m+[m[32m    document.getElementById('tile-' + currentDay).classList.add('selected-tile')[m
+[32m+[m
+[32m+[m[32m    navigator.geolocation.getCurrentPosition((position) => {[m
+[32m+[m[32m      setCoords({[m
+[32m+[m[32m        long: Math.round(position.coords.longitude),[m
+[32m+[m[32m        lat: Math.round(position.coords.lat

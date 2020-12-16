@@ -1,0 +1,41 @@
+[33mcommit 1220b71a8bd0e47e9f7c58e5138e85aedf5f6a95[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Konrad <>
+Date:   Wed Dec 16 11:14:11 2020 +0100
+
+    add location based weather
+
+[33mcommit 7858cd4ab95d98bd951d75f365a58382395e64bb[m
+Author: Konrad <>
+Date:   Wed Dec 16 09:12:34 2020 +0100
+
+    Start to make weather
+
+[33mcommit a4379fd84ed24b91c23daa23e211f7f89491cd9b[m
+Author: Konrad <>
+Date:   Sun Dec 6 17:19:04 2020 +0100
+
+    add tiles functionality - select tile, change month/year. add tile numbers, tiles layout
+
+[33mcommit 1c93ec2786466c52f2df1f6769c53aaa035f9cff[m
+Author: Konrad <>
+Date:   Thu Dec 3 17:33:10 2020 +0100
+
+    Make event window functional, limited console warnings due to unkeyed lists
+
+[33mcommit 7305bf5a88495dcbabf15a68044c5cef0ba727c8[m
+Author: CommieDwarf <tosiek22@gmail.com>
+Date:   Wed Dec 2 17:09:19 2020 +0100
+
+    Add day tiles functionality, events in preview functionality
+
+[33mcommit ac80623a210b924b83dd491b51d263d97756bb3e[m
+Author: CommieDwarf <tosiek22@gmail.com>
+Date:   Wed Dec 2 16:03:51 2020 +0100
+
+    I dont remember
+
+[33mcommit 44d6ca61742d56a43ae02c359470779884859a70[m
+Author: CommieDwarf <tosiek22@gmail.com>
+Date:   Tue Dec 1 16:13:59 2020 +0100
+
+    Begin

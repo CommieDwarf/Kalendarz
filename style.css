@@ -90,6 +90,7 @@ body {
 }
 
 
+
 .blank-tile {
   opacity: 0.15;
 }
@@ -114,6 +115,9 @@ body {
 }
 .selected-tile {
   background-color: #8D7257;
+  color: #FFEBCC;
+}
+.selected-tile > i {
   color: #FFEBCC;
 }
 
@@ -269,6 +273,7 @@ overflow-y: hidden;
   padding: 5px;
   border-bottom: 1px solid #EB9A28;
 }
+
 .event-time-div {
   display: inline-block;
 }
@@ -334,10 +339,20 @@ overflow-y: hidden;
   float: right;
   margin-right: -10px;
 }
+
+
+
 .event-edit, .event-remove {
   width: 20px;
   display: inline-block;
   cursor: pointer;
+  position: relative;
+}
+.kremowka {
+  position: absolute;
+  width: 30px;
+  top: -14px;
+  right: -5px;
 }
 .event-edit:hover, .event-remove:hover {
   color: #EB9A28;
@@ -444,6 +459,7 @@ overflow-y: hidden;
 
   .day-tile {
     width: 84px;
+    font-size: 10px;
   }
 
   #week-days {
@@ -453,6 +469,9 @@ overflow-y: hidden;
 
   #day-preview {
     width: 350px;
+  }
+  #weather-div {
+    width: 100%;
   }
 
   #day-preview-content {
@@ -526,6 +545,14 @@ overflow-y: hidden;
     width: 100%;
     margin: auto;
     margin-top: 40px;
+  }
+  #weather-div {
+    width: 70%;
+    margin: auto;
+    display: flex;
+  }
+  .hourly-weather {
+    margin: auto;
   }
   #day-preview-content {
     width: 100%;
