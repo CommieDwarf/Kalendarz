@@ -11,11 +11,21 @@ export function EventWindow(props) {
   function handleAdd(event) {
     event.preventDefault();
     let newEvent = props.newEvent
-    newEvent.text = newEvent.text == "" ? "(Bez tytułu)" : newEvent.text;
-    props.setEvents((prev) => [
-      ...prev,
-      newEvent
-    ]);
+    if (props.action == 'new') {
+
+      newEvent.text = newEvent.text == "" ? "(Bez tytułu)" : newEvent.text;
+      props.setEvents((prev) => [
+        ...prev,
+        newEvent
+      ])
+    } else if (props.action == 'edit') {
+
+      props.setEvents(props.events.filter(e => e.id != props.eventToEdit.id))
+      props.setEvents((prev) => [
+        ...prev,
+        newEvent,
+      ])
+    }
     props.setNewEvent(props.blankEvent)
 
     props.toggleWindow("hide", props.event);
@@ -90,9 +100,9 @@ export function EventWindow(props) {
       <h3>{props.action == "new" ? 'Nowe Wydarzenie' : "Edytuj Wydarzenie"}</h3>
       <form id="add-event-form">
         <input type="time" name="time" id="time-input"
-         value={props.newEvent.time.hours+":"+props.newEvent.time.minutes}/>
+         value={props.newEvent.time.hours+":"+props.newEvent.time.minutes} onChange={handleChange}/>
         <input type="date" id="date-input"
-          value={props.newEvent.date.year+"-"+props.newEvent.date.month+"-"+props.newEvent.date.day}/>
+          value={props.newEvent.date.year+"-"+props.newEvent.date.month+"-"+props.newEvent.date.day} onChange={handleChange}/>
         <input type="text" name="event-content" id="event-content-input" size="27"
           defaultValue={props.action == "edit" ? props.event.text : ""}
           value={props.newEvent.text}

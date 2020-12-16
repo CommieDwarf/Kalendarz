@@ -21,7 +21,19 @@ export function MonthContent(props) {
         thisDayEvents.push(events[j])
       }
     }
-   tiles.push(<Tile events={thisDayEvents} selectDay={selectDay} day={i} key={i}/>);
+    thisDayEvents = thisDayEvents.sort((a, b) => {
+      return (parseInt(a.time.hours) + parseInt(a.time.minutes) * 0.01) - (parseInt(b.time.hours) + parseInt(b.time.minutes) * 0.01);
+    })
+    let dayNotes = props.dayNotes;
+    let hasNote = false;
+    for (let k = 0; k < dayNotes.length; k++) {
+      if (dayNotes[k].date.year == props.selectedDate.year &&
+      dayNotes[k].date.month == props.selectedDate.month &&
+      dayNotes[k].date.day == i + 1) {
+        hasNote = true;
+      }
+    }
+   tiles.push(<Tile events={thisDayEvents} selectDay={selectDay} day={i} key={i} hasNote={hasNote}/>);
   }
 
   let i = 0;
@@ -37,12 +49,16 @@ export function MonthContent(props) {
     return day;
   }
 
+  let dayNotes = props.dayNotes;
+
   function selectDay(event) {
+
+
+
     unselectAll();
     event.target.closest('.day-tile').classList.add('selected-tile');
     event.target.closest('.day-tile').classList.remove('highlight-tile');
     let day = event.target.closest('.day-tile').getAttribute('day')
-    console.log(day);
     props.setSelectedDate({
       year: props.selectedDate.year,
       month: props.selectedDate.month,
@@ -50,15 +66,35 @@ export function MonthContent(props) {
       dayOfWeek: new Date(props.selectedDate.year, props.selectedDate.month - 1, day).getDay()
     })
 
+    if (props.newNote) {
+      props.setDayNotes(props.dayNotes.filter(note => {
+        return note.id + "" !== "" + props.selectedDate.year + props.selectedDate.month + props.selectedDate.day;
+      }))
+      props.setDayNotes((prev) => [
+        ...prev,
+        {
+          id: "" + props.selectedDate.year + props.selectedDate.month + props.selectedDate.day,
+          date: {
+            year: props.selectedDate.year,
+            month: props.selectedDate.month,
+            day: props.selectedDate.day,
+          },
+          note: props.newNote
+        }
+      ]
+    )
+  } else {
+    props.setDayNotes(props.dayNotes.filter(note => {
+      return note.id + "" !== "" + props.selectedDate.year + props.selectedDate.month + props.selectedDate.day;
+    }))
+  }
+
 
     function unselectAll() {
       let tiles = document.querySelectorAll('.day-tile')
       tiles.forEach((tile) => tile.classList.remove('selected-tile'));
     }
   }
-
-
-
 
   return (
     <div id="content">
