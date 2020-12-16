@@ -33,7 +33,21 @@ export function MonthContent(props) {
         hasNote = true;
       }
     }
-   tiles.push(<Tile events={thisDayEvents} selectDay={selectDay} day={i} key={i} hasNote={hasNote}/>);
+
+    let hasWeather = false;
+    if (props.weather && props.weather.list) {
+      let weather = props.weather.list
+      for (let k = 0; k < weather.length; k++) {
+        let date = new Date(weather[k].dt * 1000)
+        if (date.getFullYear() == props.selectedDate.year &&
+        date.getMonth() + 1 == props.selectedDate.month &&
+        date.getDate() == i + 1) {
+          hasWeather = true;
+        }
+      }
+    }
+
+   tiles.push(<Tile events={thisDayEvents} selectDay={selectDay} day={i} key={i} hasNote={hasNote} hasWeather={hasWeather}/>);
   }
 
   let i = 0;

@@ -14,11 +14,13 @@ export function MonthTitle(props) {
       props.setSelectedDate((prev) => ({
         ...prev,
         year: props.year + 1,
+        day: "",
       }))
     }
     props.setSelectedDate((prev) => ({
       ...prev,
-      month: monthNum
+      month: monthNum,
+      day: "",
     }))
     unselectAll();
   }
@@ -30,11 +32,13 @@ export function MonthTitle(props) {
       props.setSelectedDate((prev) => ({
         ...prev,
         year: props.year - 1,
+        day: "",
       }))
     }
     props.setSelectedDate((prev) => ({
       ...prev,
-      month: monthNum
+      month: monthNum,
+      day: "",
     }))
     unselectAll();
   }

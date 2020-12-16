@@ -26,6 +26,7 @@ export function Tile(props) {
   return (
     <div className="day-tile" onClick={props.selectDay} day={props.day + 1} id={'tile-' + (props.day + 1)}>
       {props.hasNote && <i className="icon-note"></i>}
+      {props.hasWeather && <i className="icon-cloud-sun"></i>}
       <ul>
         <div className="day">{props.day + 1}</div>
         {events}

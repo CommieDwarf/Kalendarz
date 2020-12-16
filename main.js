@@ -221,35 +221,55 @@ function Main(props) {
     document.querySelectorAll('.day-tile').forEach((tile) => {
       tile.classList.remove('today-tile')
     })
-    console.log(currentDate.month);
-    console.log(selectedDate.month);
     if (currentDate.month + 1 == selectedDate.month) {
       document.getElementById("tile-" + currentDate.day).classList.add('today-tile');
     }
   }, [currentDate, selectedDate])
 
 
+
+
+
+
+  let [coords, setCoords] = useState();
+
+  useEffect(() => {
+    document.getElementById('tile-' + currentDay).classList.add('selected-tile')
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      setCoords({
+        long: Math.round(position.coords.longitude),
+        lat: Math.round(position.coords.latitude)
+      })
+    })
+  }, [])
+
   let [weatherData, setWeatherData] = useState();
   let apiKey = '26d72d7bac713c25aa2ee85ea50d2f73';
   useEffect(() => {
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Bialystok&appid=26d72d7bac713c25aa2ee85ea50d2f73`)
+    let location;
+    if (coords) {
+      location = `lat=${coords.lat}&lon=${coords.long}`
+    } else {
+      location = "q=Bialystok";
+    }
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?${location}&appid=26d72d7bac713c25aa2ee85ea50d2f73`)
     .then(response => {
       return response.json();
     })
     .then(jsonResponse => {
-    //  console.log(jsonResponse)
       setWeatherData(jsonResponse)
     })
     .catch(error => {
       console.error(error)
     })
-  }, []);
+  }, [coords]);
 
   let [thisDayWeather, setThisDayWeather] = useState([]);
 
   useEffect(() => {
 
-    if (weatherData) {
+    if (weatherData && weatherData.list) {
       let dayWeather = [];
       let dataList = weatherData.list
       for(let i = 0; i < dataList.length; i++) {
@@ -275,8 +295,8 @@ function Main(props) {
     return kelvin - 273.15
   }
 
-
-
+  let long;
+  let lat;
 
   return (
     <div>
@@ -290,7 +310,8 @@ function Main(props) {
     <MonthContent selectedDate={selectedDate} events={thisMonthEvents}
     numDays={numDays} nextMonthEvents={nextMonthEvents}
     prevMonthEvents={prevMonthEvents} setSelectedDate={setSelectedDate}
-    newNote={newNote} setDayNotes={setDayNotes} dayNotes={dayNotes}/>
+    newNote={newNote} setDayNotes={setDayNotes} dayNotes={dayNotes}
+    weather={weatherData}/>
     <DayPreview selectedDate={selectedDate} events={thisMonthEvents} deleteEvent={deleteEvent}
     toggleWindow={toggleEventWindow} setDayNotes={setDayNotes}
     setNewNote={setNewNote} newNote={newNote} weather={thisDayWeather}/>

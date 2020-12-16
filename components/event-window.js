@@ -104,7 +104,7 @@ export function EventWindow(props) {
         <input type="date" id="date-input"
           value={props.newEvent.date.year+"-"+props.newEvent.date.month+"-"+props.newEvent.date.day} onChange={handleChange}/>
         <input type="text" name="event-content" id="event-content-input" size="27"
-          defaultValue={props.action == "edit" ? props.event.text : ""}
+          //defaultValue={props.action == "edit" ? props.event.text : ""}
           value={props.newEvent.text}
           onChange={handleChange}/>
         <button name="add-event" id="add-event-button" onClick={handleAdd}>Dodaj wydarzenie</button>

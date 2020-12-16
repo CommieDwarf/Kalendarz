@@ -9,7 +9,7 @@ export function DayPreview(props) {
   return (
     <div id="day-preview">
       <div id="day-preview-title">
-        <h2>{daysOfAWeek[props.selectedDate.dayOfWeek]}</h2>
+        <h2>{props.selectedDate.day ? daysOfAWeek[props.selectedDate.dayOfWeek] : "..."} </h2>
       </div>
       <div id="day-preview-content">
         <Weather weather={props.weather}/>

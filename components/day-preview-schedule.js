@@ -8,7 +8,6 @@ export function DayPreviewSchedule(props) {
   })
   events = events.map((e, index) => <Event key={index} event={e} deleteEvent={props.deleteEvent} toggleWindow={props.toggleWindow}/>)
 
-  console.log(events)
   return (
     <div id="day-preview-schedule">
       <div id="day-events">
